@@ -1,0 +1,25 @@
+Dentro do diretório do kafka:
+
+
+1 - iniciar kafka
+1.1 - start zookeeper
+.\bin\windows\kafka-server-start.bat .\config\server.properties
+
+1.2 - start kafka
+.\bin\windows\kafka-server-start.bat .\config\server.properties
+
+2 - monitorar recepção de mensagens:
+.\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic RECEPCAO_PEDIDOS --from-beginning
+
+
+3 - postar mensagem tópico kafka:
+.\kafka-console-producer.bat --broker-list localhost:9092 --topic NOVO_PEDIDO
+
+4 - listart tópicos:
+.\kafka-topics.bat --list --bootstrap-server localhost:9092
+
+5 - criar tópico:
+.\kafka-topics.bat --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic NOVO_PEDIDO
+
+
+

@@ -13,16 +13,16 @@ import org.apache.kafka.common.serialization.StringSerializer;
  * Hello world!
  *
  */
-public class App {
+public class CriadorPedidos {
 
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
-		String value = "{PedidoNumero: 1,item:sapato, valor:1050,00}";
+		String value = "{PedidoNumero: 1123,item:havaina, valor:1050,00}";
 
-		new App().postarMensagem(value);
+		new CriadorPedidos().postarMensagem(value);
 	}
 
 	private void postarMensagem(String msg) throws InterruptedException, ExecutionException {
-		KafkaProducer<String, String> kafkaProducer = new KafkaProducer<String, String>(properties());
+		KafkaProducer<String, String> kafkaProducer = new KafkaProducer<String, String>(KafkaProperties.getProperties());
 
 		ProducerRecord<String, String> producerRecord = new ProducerRecord<String, String>("RECEPCAO_PEDIDOS", msg,
 				msg);
@@ -39,23 +39,4 @@ public class App {
 		}).get();
 	}
 
-	private void processarMensagemEnvioEmail() {
-
-	}
-
-	private void processarMensagemAuditoria() {
-
-	}
-
-	private void processarFatura() {
-
-	}
-
-	private static Properties properties() {
-		Properties properties = new Properties();
-		properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092");
-		properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-		properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-		return properties;
-	}
 }
